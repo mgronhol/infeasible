@@ -42,20 +42,20 @@ import pprint
 
 params = {}
 routes = [
-				(re.compile( '/player/(.*)' ), "player"),
-				(re.compile( '/player/(.*)/html'), "htmlplayer")
+				(re.compile( '/service/(.*)' ), "service"),
+				(re.compile( '/service/(.*)/debug'), "debug")
 				]
 
 params['N_rules'] = len( routes )
 
 
 params['paths'] = [
-		('/player/1', 'player'),
-		('/player/1/html', 'htmlplayer'),
-		('/player/norsuja', 'player'),
-		('/player/nmarsuja/3', 'player'),
-		('/player/1/html', 'htmlplayer'),
-		('/player/nmarsuja/3/html', 'htmlplayer')
+		('/service/1', 'service'),
+		('/service/1/debug', 'debug'),
+		('/service/elephants', 'service'),
+		('/service/elephants/3', 'service'),
+		('/service/1/debug', 'debug'),
+		('/service/walruses/3/debug', 'debug')
 		]
 
 
