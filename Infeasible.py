@@ -34,8 +34,14 @@ class Solution( object ):
 		self.out = []
 	
 	def must_satisfy( self, rule ):
-		self._constraints.append( rule )
+		self._constraints.append( ( rule, 1.0 ) )
 		return rule
+	
+	def should_satisfy( self, w ):
+		def constraint_wrapper( rule ):
+			self._constraints.append( ( rule, w ) )
+			return rule
+		return constraint_wrapper
 	
 	def is_valid( self, rule ):
 		self._is_valid = rule
@@ -56,7 +62,14 @@ class Solution( object ):
 		return self._is_valid( self.params, c )
 	
 	def reject( self, c ):
-		return any( not F( self.params, c ) for F in self._constraints )
+		#return any( not F( self.params, c ) for F in self._constraints )
+		total = 0
+		for (F, w) in self._constraints:
+			if not F( self.params, c ):
+				total += w
+		
+		return total >= 1.0
+		
 	
 	def first( self ):
 		return self._first( self.params, self.domain )
